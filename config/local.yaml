@@ -1,0 +1,20 @@
+# Local development configuration for the catalog service
+# This file is used when running the application locally (not in Docker)
+
+addr: ":8080"
+database_url: "postgres://catalog_user:catalog_password@localhost:5432/kong_catalog?sslmode=disable"
+max_page_size: 50
+# Database connection configuration
+db_max_connections: 10
+db_min_connections: 2
+db_max_conn_lifetime: "1h"
+db_max_conn_idle_time: "15m"
+db_connect_timeout: "10s"
+db_health_check_period: "1m"
+db_statement_timeout: "30s"
+db_tls_mode: "disable"
+
+# API configuration
+valid_api_keys:
+  - "local-dev-key"
+  - "test-api-key"
