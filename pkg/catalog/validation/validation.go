@@ -62,13 +62,6 @@ func ValidateListServicesParams(r *http.Request) error {
 				Message: "must be a non-negative integer",
 			})
 		}
-		// Additional validation for offset parameter
-		if len(offsetStr) > 10 {
-			errors = append(errors, ValidationError{
-				Field:   "offset",
-				Message: "offset parameter string must be 10 characters or less",
-			})
-		}
 	}
 
 	// Validate sort
@@ -87,13 +80,6 @@ func ValidateListServicesParams(r *http.Request) error {
 				Message: fmt.Sprintf("must be one of: %s", strings.Join(allowedSorts, ", ")),
 			})
 		}
-		// Additional validation for sort parameter
-		if len(sort) > 50 {
-			errors = append(errors, ValidationError{
-				Field:   "sort",
-				Message: "sort parameter must be 50 characters or less",
-			})
-		}
 	}
 
 	// Validate order
@@ -102,13 +88,6 @@ func ValidateListServicesParams(r *http.Request) error {
 			errors = append(errors, ValidationError{
 				Field:   "order",
 				Message: "must be either 'asc' or 'desc'",
-			})
-		}
-		// Additional validation for order parameter
-		if len(order) > 10 {
-			errors = append(errors, ValidationError{
-				Field:   "order",
-				Message: "order parameter must be 10 characters or less",
 			})
 		}
 	}
@@ -131,21 +110,11 @@ func ValidateListServicesParams(r *http.Request) error {
 				Message: "search query must be at least 1 character long",
 			})
 		}
-		if len(q) > 500 {
+		if len(q) > 100 {
 			errors = append(errors, ValidationError{
 				Field:   "q",
-				Message: "search query must be 500 characters or less",
+				Message: "search query must be 100 characters or less",
 			})
-		}
-		// Validate query content - should not contain potentially harmful characters
-		for _, char := range q {
-			if char < 32 || char > 126 {
-				errors = append(errors, ValidationError{
-					Field:   "q",
-					Message: "search query contains invalid characters",
-				})
-				break
-			}
 		}
 	}
 

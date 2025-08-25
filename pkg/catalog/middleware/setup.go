@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -17,9 +16,6 @@ func SetupGlobalMiddleware(r *chi.Mux, validAPIKeys []string) {
 
 	// 3. Authentication middleware - validates API keys (skips health checks)
 	r.Use(APIKeyMiddleware(validAPIKeys))
-
-	// 4. Timeout middleware - cancels requests that take too long
-	r.Use(TimeoutMiddleware(30 * time.Second))
 }
 
 // SetupRouteSpecificMiddleware applies middleware to specific routes
