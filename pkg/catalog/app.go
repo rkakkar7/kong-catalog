@@ -73,5 +73,8 @@ func New(ctx context.Context, cfg *config.AppConfig) (*App, error) {
 // Router returns the router for the app
 func (a *App) Router() http.Handler { return a.r }
 
+// Pool returns the database pool
+func (a *App) Pool() *pgxpool.Pool { return a.pool }
+
 // Close closes the app
 func (a *App) Close() { a.pool.Close() }
